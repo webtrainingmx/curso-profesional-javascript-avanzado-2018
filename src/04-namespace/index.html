@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Object Literal</title>
+</head>
+<body>
+    <script type="text/javascript">
+      function start() {
+        console.log('>> start global()');
+      }
+
+      function render() {
+        console.log('>> render global()');
+      }
+    </script>
+
+    <script src="js/script.js"></script>
+
+    <script type="text/javascript">
+      start();
+      render();
+
+      Company.app.start();
+      Company.app.render();
+    </script>
+
+</body>
+</html>

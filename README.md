@@ -48,17 +48,25 @@
 ### Namespace
 
 ```
-var app = {
-    start : function() {
+(function(global) {
 
+  var Company = global.Company || {};
+
+  var app = {
+    start: function() {
+      console.log('>> start() external');
     },
-    render : function() {
-
+    render: function() {
+      console.log('>> render() external');
     }
-};
+  };
 
-app.start();
-app.render();
+  Company.app = app;
+
+  if (typeof global.Company === 'undefined') {
+    window.Company = Company;
+  }
+})(window);
 ```
 
 ### Module
