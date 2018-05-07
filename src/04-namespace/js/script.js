@@ -8,7 +8,8 @@
     },
     render: function() {
       console.log('>> render() external');
-    }
+    },
+    data : [1, 3, 5]
   };
 
   Company.app = app;
