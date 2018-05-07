@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Promises</title>
+</head>
+<body>
+
+    <p>Example using the Github Jobs API, e. g.
+        <a href="https://jobs.github.com/positions.json?description=javascript&location=california" target="_blank">
+            https://jobs.github.com/positions.json?description=javascript&location=california
+        </a>
+    </p>
+
+    <div id="js-jobs-placeholder">
+        <p>Jobs will be rendered here!</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      Company.app.start().then(function(data) {
+        Company.app.render({
+          el: '#js-jobs-placeholder',
+          data: data
+        });
+      });
+
+    </script>
+</body>
+</html>

@@ -34,7 +34,7 @@
     return {
       getInstance: function() {
         if (!_instance) {
-          console.log;
+          console.log('>> getInstance() > instance created!');
           _instance = init();
         }
 
