@@ -37,8 +37,8 @@
         var items = ['<ul>'];
 
         data.forEach(function(jobPosition) {
-          items.push('<li><div class="b-job">'
-              + jobPosition.title
+          items.push('<li><div class="b-job box">'
+              + '<a href="#">' + jobPosition.title + '</a>'
               + ' <strong>(' + jobPosition.location + ')</strong>'
               + '</div></li>');
         });
