@@ -1,65 +1,42 @@
-(function(global, axios) {
+(function() {
 
-  var Company = global.Company || {};
+  function step1() {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        console.log('>> step 1');
+        resolve(100);
+      }, 1500);
 
-  var app = (function() {
-
-    var _privateData = [];
-
-    // "Private" functions
-    function _getData(url) {
-      return axios.get(url);
-    }
-
-    // "Public" functions
-    function start() {
-      var url = './data/job-positions-api.json';
-
-      return new Promise(function(resolve, reject) {
-        _getData(url).then(function(response) {
-          _privateData = response.data;
-          resolve(_privateData);
-        }, function(error) {
-          console.error(error);
-        });
-      });
-
-    }
-
-    function render(options) {
-      var element = options.el || false;
-      var data = options.data || [];
-
-      var $domElement = document.querySelector(element);
-
-      if (!!$domElement) {
-
-        var items = ['<ul>'];
-
-        data.forEach(function(jobPosition) {
-          items.push('<li><div class="b-job box">'
-              + '<a href="#">' + jobPosition.title + '</a>'
-              + ' <strong>(' + jobPosition.location + ')</strong>'
-              + '</div></li>');
-        });
-
-        items.push('</ul>');
-
-        $domElement.innerHTML = items.join('');
-      }
-    }
-
-    // We "reveal" only what we want!
-    return {
-      start: start,
-      render: render
-    };
-
-  })();
-
-  Company.app = app;
-
-  if (typeof global.Company === 'undefined') {
-    window.Company = Company;
+    });
   }
-})(window, window.axios);
+
+  function step2(number) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        console.log('>> step 2');
+        resolve([number, 200]);
+      }, 100);
+
+    });
+  }
+
+  function step3(items) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        resolve([...items, 300]);
+      }, 50);
+
+    });
+  }
+
+  step1().then(function(number) {
+    console.log('After 1', number);
+    return step2(number);
+  }).then(function(items) {
+    console.log('After 2', items);
+    return step3(items);
+  }).then(function(items) {
+    console.log('After 3', items);
+  });
+
+})();
