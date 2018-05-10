@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facade</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <style>
+        .column {
+            /* Replace this for an actual Bulma implementation */
+            width: 25%;
+            float: left;
+        }
+
+        .card {
+            min-height: 400px;
+        }
+
+        .title {
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="placeholder" class="container">
+        Dynamic content will be loaded here :)
+    </div>
+
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <script src="js/app.utils.js"></script>
+    <script src="js/app.render-engine.js"></script>
+
+    <script type="text/x-handlebars" id="template">
+        <div class="content">
+
+            {{#each items}}
+            <div class="column">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src="{{company_logo}}" alt="{{company}}">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title">{{title}}</p>
+                                <p class="company is-6">{{company}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+    </script>
+    <script>
+
+
+      (function() {
+        var url = './data/job-positions-api.json';
+
+        App.utils.http.get(url).then(function(response) {
+          return response;
+        }).then(function(data) {
+          App.engine.render({
+            renderElement: '#placeholder',
+            templateSelector: '#template',
+            data: {items: data}
+
+          });
+        }).catch(function(error) { console.error(error);});
+
+      })();
+
+    </script>
+</body>
+</html>
