@@ -199,5 +199,74 @@ app.render();
 ```
 
 ### Factory
+```
+(function(global, $) {
+  'use strict';
+
+  var App = global.App || {};
+  var utils = App.utils || {};
+
+  utils.http = (function() {
+    'use strict';
+
+    function sendAJAX(params) {
+
+    }
+
+    function buildParamsObject(url, method, data) {
+
+    }
+
+    // Module pattern
+    return {
+      // Facade for GET requests
+      get: function(url, data) {
+        var params = buildParamsObject(url, 'GET', data);
+        return sendAJAX(params);
+      },
+      // Facade for POST requests
+      post: function(url, data) {
+        var params = buildParamsObject(url, 'POST', data);
+        return sendAJAX(params);
+      }
+    };
+  })();
+
+
+
+})(window);
+```
 
 ### Prototype
+
+Crea objetos basado en un *template* de un objeto existente mediante
+**clonación**.
+
+```
+(function() {
+  'use strict';
+
+  var genericUser = {
+    name: '',
+    addAttribute: function() {
+      console.log('>> addAttribute');
+    },
+    getAttribute: function() {
+      console.log('>> getAttribute');
+    }
+  };
+
+  // We use "the prototype" pattern to create an object called "esmeralda"
+  var esmeralda = Object.create(genericUser, {
+    'name': {
+      value: 'Esmeralda',
+      // writable:false, configurable:false by default
+      enumerable: true
+    }
+  });
+
+  console.log(esmeralda, esmeralda.addAttribute());
+
+})();
+
+```
