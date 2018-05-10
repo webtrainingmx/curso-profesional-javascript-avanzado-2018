@@ -1,8 +1,9 @@
-// import {Observable} from 'rxjs';
 import {range, interval} from 'rxjs';
 import {map, take, toArray, filter} from 'rxjs/operators';
 import SpreadOperationsRenamed from './spread-operations';
+import Destructuring from './destructuring';
 import {CONFIG as Configuration} from './spread-operations';
+import {createTemplateLiteral} from './template-literals';
 
 class App {
 
@@ -28,15 +29,6 @@ class App {
     this.registerDOMEvents();
   }
 
-  createTemplateLiteral() {
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
-    const protocol = 'https';
-    const hostname = 'webtraining.zone';
-    const usersAPIURL = `${protocol}://${hostname}/api/v1/users`;
-
-    console.log('usersAPIURL', usersAPIURL);
-  }
-
   createStream() {
     this.isStreamEnabled = true;
     this.subscription$ = this.source$.pipe(
@@ -52,8 +44,16 @@ class App {
 
 const app = new App();
 app.start();
-app.createTemplateLiteral();
 app.createStream();
 
+// Using an "static" method
 console.log('CONFIG', Configuration);
 SpreadOperationsRenamed.createExampleSpreadSyntax();
+
+// Call to function creating a NEW object
+const destructuringExample = new Destructuring();
+destructuringExample.createDestructuringExample();
+destructuringExample.arrayDestructuringExample();
+
+// Call to simple function
+createTemplateLiteral();
