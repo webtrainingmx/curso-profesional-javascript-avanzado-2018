@@ -1,6 +1,8 @@
 // import {Observable} from 'rxjs';
 import {range, interval} from 'rxjs';
 import {map, take, toArray, filter} from 'rxjs/operators';
+import SpreadOperationsRenamed from './spread-operations';
+import {CONFIG as Configuration} from './spread-operations';
 
 class App {
 
@@ -16,6 +18,7 @@ class App {
     $button.addEventListener('click', () => {
       if (this.isStreamEnabled) {
         this.subscription$.unsubscribe();
+        console.warn('Subscription removed');
       }
 
     });
@@ -23,6 +26,15 @@ class App {
 
   start() {
     this.registerDOMEvents();
+  }
+
+  createTemplateLiteral() {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+    const protocol = 'https';
+    const hostname = 'webtraining.zone';
+    const usersAPIURL = `${protocol}://${hostname}/api/v1/users`;
+
+    console.log('usersAPIURL', usersAPIURL);
   }
 
   createStream() {
@@ -40,4 +52,8 @@ class App {
 
 const app = new App();
 app.start();
+app.createTemplateLiteral();
 app.createStream();
+
+console.log('CONFIG', Configuration);
+SpreadOperationsRenamed.createExampleSpreadSyntax();
